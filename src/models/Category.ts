@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import Exercise from './Exercise';
 
 @Entity('categories')
 class Category {
@@ -13,6 +15,9 @@ class Category {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Exercise, exercise => exercise.category)
+  exercises: Exercise[];
 
   @CreateDateColumn()
   created_at: Date;
