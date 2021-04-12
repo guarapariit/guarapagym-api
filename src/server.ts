@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import 'express-async-errors';
+import './database';
 
 import log from 'middlewares/log';
 
