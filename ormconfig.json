@@ -1,9 +1,9 @@
 {
   "type": "postgres",
-  "host": "localhost",
-  "port": "5432",
+  "host": "guarapari.brazilsouth.cloudapp.azure.com",
+  "port": "5000",
   "username": "postgres",
-  "password": "docker",
+  "password": "guarapariit2021fatecscs",
   "database": "guarapagym",
 	"entities": [
     "./src/models/*.ts"

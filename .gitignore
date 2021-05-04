@@ -7,5 +7,7 @@ tmp/*
 !tmp/.gitkeep
 temp/
 .env
+.env.development
+
 
 coverage/
