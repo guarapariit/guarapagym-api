@@ -7,9 +7,10 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import Exercise from './Exercise';
 
 @Entity('sequencies')
-class Exercise {
+class Sequency {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -33,4 +34,4 @@ class Exercise {
   updated_at: Date;
 }
 
-export default Exercise;
+export default Sequency;
