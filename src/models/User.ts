@@ -32,7 +32,7 @@ class User {
   @Column()
   password: string;
 
-  @Column({ array: true })
+  @Column('integer', { array: true })
   days: number[];
 
   @CreateDateColumn()
