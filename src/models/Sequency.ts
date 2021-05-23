@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
   JoinColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import Exercise from './Exercise';
+import TrainingsSequencies from './TrainingsSequencies';
 
 @Entity('sequencies')
 class Sequency {
@@ -20,6 +22,12 @@ class Sequency {
   @ManyToOne(() => Exercise)
   @JoinColumn({ name: 'exercise_id' })
   exercise: Exercise;
+
+  @OneToMany(
+    () => TrainingsSequencies,
+    sequencyToTraining => sequencyToTraining.sequency,
+  )
+  trainings_sequencies: TrainingsSequencies[];
 
   @Column()
   sets: number;
