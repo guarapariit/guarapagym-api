@@ -11,3 +11,5 @@ temp/
 
 
 coverage/
+
+ormconfig.json
