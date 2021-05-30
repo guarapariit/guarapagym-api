@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "guarapari.brazilsouth.cloudapp.azure.com",
-  "port": "5000",
-  "username": "postgres",
-  "password": "guarapariit2021fatecscs",
-  "database": "guarapagym",
+  "host": "ec2-54-158-232-223.compute-1.amazonaws.com",
+  "port": "5432",
+  "username": "wtnqlbcieqzafm",
+  "password": "aa6347d8b31d92144c777a228fd8e93d25bc45424f5aa8b71d90f352812ad85b",
+  "database": "domb96ai0p0fa",
 	"entities": [
     "./src/models/*.ts"
   ],
