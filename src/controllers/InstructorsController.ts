@@ -1,10 +1,11 @@
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
 
 export default class TeachersController {
   async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, cpf, phone, password, days } = request.body;
+    const { name, email, cpf, phone, password } = request.body;
 
     const createUser = new CreateUserService();
 
@@ -15,9 +16,10 @@ export default class TeachersController {
       phone,
       role: 1,
       password,
-      days,
     });
 
-    return response.json(user);
+    const { ...newUser } = classToClass(user);
+
+    return response.json({ user: newUser });
   }
 }

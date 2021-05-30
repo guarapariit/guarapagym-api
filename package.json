@@ -5,7 +5,9 @@
   "author": "Bruno Rodrigues <brunorodriguesricardo@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "prebuild": "node prebuild.js",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "predev": "node predev.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "start": "node dist/server.js",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",

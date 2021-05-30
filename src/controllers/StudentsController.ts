@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
@@ -18,6 +19,6 @@ export default class StudentsController {
       days,
     });
 
-    return response.json(user);
+    return response.json({ user: classToClass(user) });
   }
 }
