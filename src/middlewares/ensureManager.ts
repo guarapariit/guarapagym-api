@@ -1,6 +1,6 @@
-import AppError from 'errors/AppError';
 import { Request, Response, NextFunction } from 'express';
-import UsersRepository from 'repositories/UsersRepository';
+import UsersRepository from '../repositories/UsersRepository';
+import AppError from '../errors/AppError';
 
 export default async function ensureManager(
   request: Request,
