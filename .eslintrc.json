@@ -22,7 +22,12 @@
 
       "@typescript-eslint/camelcase": "off",
       "camelcase": "off",
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        },
+      ],
 			"no-use-before-define": "off",
       "class-methods-use-this":"off",
 			"@typescript-eslint/no-use-before-define": [
