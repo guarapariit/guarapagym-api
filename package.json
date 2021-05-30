@@ -5,9 +5,8 @@
   "author": "Bruno Rodrigues <brunorodriguesricardo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "node dist/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node -r tsconfig-paths/register --transpile-only src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest"
   },
