@@ -57,11 +57,12 @@ class UsersRepository {
   }: FindAllUsersDTO): Promise<User[]> {
     const where: Record<string, any> = {};
     if (except_user_id) {
-      where.id = except_user_id;
+      where.id = Not(except_user_id);
     }
-    if (user_role) {
+    if (user_role !== undefined) {
       where.role = user_role;
     }
+    console.log(where);
     const users = await this.ormRepository.find({
       where,
     });
