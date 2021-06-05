@@ -3,6 +3,12 @@ import fs from 'fs';
 import uploadConfig from '../config/upload';
 
 export async function saveFile(file: string): Promise<string> {
+  try {
+    await fs.promises.stat(uploadConfig.uploadsFolder);
+  } catch {
+    console.log('Creating uploads folder...');
+    await fs.promises.mkdir(uploadConfig.uploadsFolder);
+  }
   await fs.promises.rename(
     path.resolve(uploadConfig.tmpFolder, file),
     path.resolve(uploadConfig.uploadsFolder, file),
