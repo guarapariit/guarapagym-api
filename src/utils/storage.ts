@@ -35,7 +35,6 @@ export async function deleteFile(file: string): Promise<void> {
 export async function uploadImgur(file: string): Promise<string> {
   const filePath = path.resolve(uploadConfig.tmpFolder, file);
   const newFile = fs.createReadStream(filePath);
-  console.log(filePath);
   const formData = new FormData();
   formData.append('image', newFile);
   try {
@@ -52,7 +51,6 @@ export async function uploadImgur(file: string): Promise<string> {
     deleteFile(filePath);
     return response.data.data.link;
   } catch (e) {
-    console.log(e.response.data);
     throw new AppError('Error sending image to Imgur API.');
   }
 }
