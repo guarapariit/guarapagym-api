@@ -1,7 +1,7 @@
 import AppError from '../errors/AppError';
 import User from '../models/User';
 import UsersRepository from '../repositories/UsersRepository';
-import { deleteFile, saveFile } from '../utils/storage';
+import { uploadImgur } from '../utils/storage';
 
 interface IRequest {
   user_id: string;
@@ -17,14 +17,9 @@ class UpdateUserAvatarService {
     if (!user) {
       throw new AppError('Only authenticated user can change avatar.', 401);
     }
+    const filename = await uploadImgur(avatarFilename);
 
-    if (user.avatar) {
-      await deleteFile(user.avatar);
-    }
-
-    const filename = await saveFile(avatarFilename);
-
-    user.avatar = filename;
+    user.avatar_url = filename;
 
     await this.usersRepository.save(user);
 
