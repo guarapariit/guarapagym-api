@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ensureInstructor from 'middlewares/ensureInstructor';
+import ensureInstructor from '../../middlewares/ensureInstructor';
 import ensureManager from '../../middlewares/ensureManager';
 
 import StudentsController from '../../controllers/StudentsController';
