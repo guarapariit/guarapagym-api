@@ -6,7 +6,8 @@ import {
 } from 'typeorm';
 
 export default class CreateTrainingsSequencies1621735167408
-  implements MigrationInterface {
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({

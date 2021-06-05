@@ -13,6 +13,7 @@ interface IRequest {
   role: 0 | 1 | 2;
   password: string;
   days?: number[];
+  instructor_id?: string;
 }
 
 class CreateUserService {
@@ -26,6 +27,7 @@ class CreateUserService {
     role,
     password,
     days = [],
+    instructor_id,
   }: IRequest): Promise<User> {
     const checkUserEmailExists = await this.usersRepository.findByEmail(email);
     const checkUserCpfExists = await this.usersRepository.findByCpf(cpf);
@@ -36,8 +38,21 @@ class CreateUserService {
     if (checkUserCpfExists) {
       throw new AppError('CPF already used.');
     }
-    if (role === 0 && days.length <= 0) {
-      throw new AppError("Students must have the 'days' array.");
+    if (role === 0) {
+      // User is student
+      if (days.length <= 0) {
+        throw new AppError("Students must have the 'days' array.");
+      }
+      if (!instructor_id) {
+        throw new AppError('Students must be assigned to an instructor.');
+      } else {
+        const checkInstructorExists = await this.usersRepository.findById(
+          instructor_id,
+        );
+        if (!checkInstructorExists) {
+          throw new AppError('Instructor does not exist.');
+        }
+      }
     }
 
     const hashedPassword = await hash(password, 8);
@@ -50,6 +65,7 @@ class CreateUserService {
       role,
       password: hashedPassword,
       days,
+      instructor_id,
     });
 
     return user;

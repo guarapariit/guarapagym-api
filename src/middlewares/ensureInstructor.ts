@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import UsersRepository from '../repositories/UsersRepository';
 import AppError from '../errors/AppError';
 
-export default async function ensureTeacher(
+export default async function ensureInstructor(
   request: Request,
   response: Response,
   next: NextFunction,

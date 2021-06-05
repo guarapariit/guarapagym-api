@@ -4,6 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
@@ -39,6 +43,10 @@ class User {
   @Column('integer', { array: true })
   days: number[];
 
+  @Exclude()
+  @Column()
+  instructor_id: string;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -72,6 +80,14 @@ class User {
       return undefined;
     }
     return this.days;
+  }
+
+  @Expose({ name: 'instructor_id' })
+  getAssignedInstructorId(): string | undefined {
+    if (this.role > 0) {
+      return undefined;
+    }
+    return this.instructor_id;
   }
 }
 

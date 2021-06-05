@@ -4,7 +4,11 @@ import User from '../models/User';
 
 interface FindAllUsersDTO {
   except_user_id?: string;
-  user_role?: 0 | 1 | 2;
+  user_role?: number;
+}
+
+interface FindInstructorStudentsDTO {
+  instructor_id: string;
 }
 
 interface CreateUserDTO {
@@ -12,9 +16,10 @@ interface CreateUserDTO {
   email: string;
   cpf: string;
   phone: string;
-  role: 0 | 1 | 2;
+  role: number;
   password: string;
   days: number[];
+  instructor_id?: string;
 }
 
 class UsersRepository {
@@ -50,10 +55,27 @@ class UsersRepository {
     except_user_id,
     user_role,
   }: FindAllUsersDTO): Promise<User[]> {
+    const where: Record<string, any> = {};
+    if (except_user_id) {
+      where.id = except_user_id;
+    }
+    if (user_role) {
+      where.role = user_role;
+    }
+    const users = await this.ormRepository.find({
+      where,
+    });
+
+    return users;
+  }
+
+  public async findInstructorStudents({
+    instructor_id,
+  }: FindInstructorStudentsDTO): Promise<User[]> {
     const users = await this.ormRepository.find({
       where: {
-        id: except_user_id ? Not(except_user_id) : undefined,
-        role: user_role ?? undefined,
+        instructor_id,
+        role: 0,
       },
     });
 

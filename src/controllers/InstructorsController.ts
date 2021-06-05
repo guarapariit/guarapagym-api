@@ -2,6 +2,7 @@ import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
+import ListUserByRoleService from '../services/ListUserByRoleService';
 
 export default class TeachersController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -21,5 +22,15 @@ export default class TeachersController {
     const { ...newUser } = classToClass(user);
 
     return response.json({ user: newUser });
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const listUserByRole = new ListUserByRoleService();
+
+    const users = (await listUserByRole.execute({ role: 1 })).map(user =>
+      classToClass(user),
+    );
+
+    return response.json(users);
   }
 }
