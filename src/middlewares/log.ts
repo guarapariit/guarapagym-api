@@ -25,7 +25,9 @@ export default function demoLogger(
   const status = res.statusCode;
   const start = process.hrtime();
   const durationInMilliseconds = getActualRequestDurationInMilliseconds(start);
-  const log = `[${formattedDate}] ${method} ${url} ${status} ${durationInMilliseconds.toLocaleString()} ms`;
+  const log = `[${formattedDate}] ${method} ${url} ${status} ${
+    durationInMilliseconds * 10000
+  } ms`;
   console.log(log);
   return next();
 }

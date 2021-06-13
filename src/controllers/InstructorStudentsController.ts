@@ -1,6 +1,6 @@
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
-import ListInstructorStudentsService from '../services/ListInstructorStudents';
+import ListInstructorStudentsService from '../services/ListInstructorStudentsService';
 
 export default class InstructorStudentsController {
   async show(request: Request, response: Response): Promise<Response> {
