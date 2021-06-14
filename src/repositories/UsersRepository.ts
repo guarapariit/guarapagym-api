@@ -62,7 +62,6 @@ class UsersRepository {
     if (user_role !== undefined) {
       where.role = user_role;
     }
-    console.log(where);
     const users = await this.ormRepository.find({
       where,
     });
