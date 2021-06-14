@@ -1,4 +1,3 @@
-import AppError from '../errors/AppError';
 import UsersRepository from '../repositories/UsersRepository';
 
 import User from '../models/User';

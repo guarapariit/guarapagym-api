@@ -21,4 +21,11 @@ instructorsRouter.get(
   instructorsController.show,
 );
 
+instructorsRouter.put(
+  '/',
+  ensureAuthenticated,
+  ensureManager,
+  instructorsController.update,
+);
+
 export default instructorsRouter;

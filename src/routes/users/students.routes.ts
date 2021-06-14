@@ -31,4 +31,11 @@ studentsRouter.get(
   instructorStudentsController.show,
 );
 
+studentsRouter.put(
+  '/',
+  ensureAuthenticated,
+  ensureManager,
+  studentsController.update,
+);
+
 export default studentsRouter;

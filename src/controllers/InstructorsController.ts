@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
 import ListUserByRoleService from '../services/ListUserByRoleService';
+import UpdateUserService from '../services/UpdateUserService';
 
 export default class TeachersController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -32,5 +33,21 @@ export default class TeachersController {
     );
 
     return response.json(users);
+  }
+
+  async update(request: Request, response: Response): Promise<Response> {
+    const { id, name, cpf, phone } = request.body;
+
+    const updateUser = new UpdateUserService();
+
+    const user = await updateUser.execute({
+      id,
+      name,
+      cpf,
+      phone,
+      role: 1,
+    });
+
+    return response.json(classToClass(user));
   }
 }
