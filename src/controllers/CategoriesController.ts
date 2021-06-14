@@ -3,6 +3,7 @@ import DeleteCategoryService from '../services/DeleteCategoryService';
 import CreateCategoryService from '../services/CreateCategoryService';
 
 import ListCategoriesService from '../services/ListCategoriesService';
+import UpdateCategoryService from '../services/UpdateCategoryService';
 
 export default class CategoriesController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -11,6 +12,16 @@ export default class CategoriesController {
     const createCategory = new CreateCategoryService();
 
     const category = await createCategory.execute({ name });
+
+    return response.json(category);
+  }
+
+  async update(request: Request, response: Response): Promise<Response> {
+    const { id, name } = request.body;
+
+    const updateCategory = new UpdateCategoryService();
+
+    const category = await updateCategory.execute({ id, name });
 
     return response.json(category);
   }
