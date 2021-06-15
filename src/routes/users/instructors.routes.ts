@@ -21,6 +21,13 @@ instructorsRouter.get(
   instructorsController.show,
 );
 
+instructorsRouter.get(
+  '/:id',
+  ensureAuthenticated,
+  ensureManager,
+  instructorsController.index,
+);
+
 instructorsRouter.put(
   '/',
   ensureAuthenticated,

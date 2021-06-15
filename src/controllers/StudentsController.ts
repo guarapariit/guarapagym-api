@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
 import ListUserByRoleService from '../services/ListUserByRoleService';
 import UpdateUserService from '../services/UpdateUserService';
+import ShowUserService from '../services/ShowUserService';
 
 export default class StudentsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -34,6 +35,15 @@ export default class StudentsController {
     );
 
     return response.json(users);
+  }
+
+  async index(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const showUser = new ShowUserService();
+
+    const user = await showUser.execute({ id });
+
+    return response.json(classToClass(user));
   }
 
   async update(request: Request, response: Response): Promise<Response> {
