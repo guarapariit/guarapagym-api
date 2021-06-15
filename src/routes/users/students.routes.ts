@@ -25,17 +25,17 @@ studentsRouter.get(
 );
 
 studentsRouter.get(
-  '/:id',
-  ensureAuthenticated,
-  ensureManager,
-  studentsController.index,
-);
-
-studentsRouter.get(
   '/me',
   ensureAuthenticated,
   ensureInstructor,
   instructorStudentsController.show,
+);
+
+studentsRouter.get(
+  '/:id',
+  ensureAuthenticated,
+  ensureManager,
+  studentsController.index,
 );
 
 studentsRouter.put(

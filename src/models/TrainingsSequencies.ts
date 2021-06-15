@@ -20,7 +20,9 @@ class TrainingsSequencies {
   @JoinColumn({ name: 'training_id' })
   training: Training;
 
-  @ManyToOne(() => Sequency, sequency => sequency.trainings_sequencies)
+  @ManyToOne(() => Sequency, sequency => sequency.trainings_sequencies, {
+    eager: true,
+  })
   @JoinColumn({ name: 'sequency_id' })
   sequency: Sequency;
 

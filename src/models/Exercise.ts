@@ -20,7 +20,7 @@ class Exercise {
   @Column()
   category_id: string;
 
-  @ManyToOne(() => Category, category => category.exercises)
+  @ManyToOne(() => Category, category => category.exercises, { eager: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 

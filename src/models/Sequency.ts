@@ -19,8 +19,8 @@ class Sequency {
   @Column()
   exercise_id: string;
 
-  @ManyToOne(() => Exercise)
-  @JoinColumn({ name: 'exercise_id' })
+  @ManyToOne(() => Exercise, { eager: true })
+  @JoinColumn({ name: 'exercise_id', referencedColumnName: 'id' })
   exercise: Exercise;
 
   @OneToMany(
@@ -29,10 +29,10 @@ class Sequency {
   )
   trainings_sequencies: TrainingsSequencies[];
 
-  @Column()
+  @Column('int')
   sets: number;
 
-  @Column()
+  @Column('int')
   repetitions: number;
 
   @CreateDateColumn()

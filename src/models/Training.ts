@@ -19,6 +19,12 @@ class Training {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
+  student_id: string;
+
+  @Column()
+  instructor_id: string;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'student_id' })
   student: User;
@@ -31,7 +37,8 @@ class Training {
     () => TrainingsSequencies,
     sequencyToTraining => sequencyToTraining.training,
     {
-      cascade: true,
+      cascade: ['insert', 'update', 'remove'],
+      eager: true,
     },
   )
   trainings_sequencies: TrainingsSequencies[];
@@ -50,7 +57,7 @@ class Training {
     if (!this.trainings_sequencies.length) {
       return null;
     }
-    return this.trainings_sequencies[0].sequency.exercise.category.name;
+    return this.trainings_sequencies[0].sequency?.exercise?.category?.name;
   }
 }
 
