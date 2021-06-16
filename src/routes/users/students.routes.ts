@@ -21,7 +21,7 @@ studentsRouter.get('/', ensureManager, studentsController.show);
 
 studentsRouter.get('/me', ensureInstructor, instructorStudentsController.show);
 
-studentsRouter.get('/:id', ensureManager, studentsController.index);
+studentsRouter.get('/:id', ensureInstructor, studentsController.index);
 
 studentsRouter.put('/', ensureManager, studentsController.update);
 
