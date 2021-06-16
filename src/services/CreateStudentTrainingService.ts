@@ -1,5 +1,7 @@
 import { getRepository } from 'typeorm';
 
+import UsersRepository from 'repositories/UsersRepository';
+import Exercise from 'models/Exercise';
 import AppError from '../errors/AppError';
 
 import TrainingsRepository from '../repositories/TrainingsRepository';
@@ -14,6 +16,10 @@ interface IRequest {
 }
 
 class CreateTrainingService {
+  private usersRepository = new UsersRepository();
+
+  private exercisesRepository = getRepository(Exercise);
+
   private sequenciesRepository = getRepository(Sequency);
 
   private trainingsRepository = new TrainingsRepository();
@@ -24,6 +30,51 @@ class CreateTrainingService {
     sequencies,
     student_id,
   }: IRequest): Promise<Training> {
+    const checkInstructorExists = await this.usersRepository.findById(
+      instructor_id,
+    );
+
+    if (!checkInstructorExists) {
+      throw new AppError('Instructor does not exist.');
+    }
+    const checkStudentExists = await this.usersRepository.findById(student_id);
+
+    if (!checkStudentExists) {
+      throw new AppError('Student does not exist.');
+    }
+
+    // const checkIfSequencyHaventExercise = sequencies.filter(
+    //   sequency => !sequency.id,
+    // );
+
+    // if (checkIfSequencyHaventExercise.length > 0) {
+    //   throw new AppError('Please provide an exercise to all sequencies.');
+    // }
+
+    const auxExerciseId = sequencies.map(sequency => sequency.exercise_id);
+
+    const checkExerciseExists = await this.exercisesRepository.findByIds(
+      auxExerciseId,
+    );
+
+    if (!checkExerciseExists.length) {
+      throw new AppError('Exercise does not exist.');
+    }
+
+    const existentExercisesIds = checkExerciseExists.map(
+      exercise => exercise.id,
+    );
+
+    const checkInexistentExercisesIds = auxExerciseId.filter(
+      exerciseId => !existentExercisesIds.includes(exerciseId),
+    );
+
+    if (checkInexistentExercisesIds.length) {
+      throw new AppError(
+        `Exercise ${checkInexistentExercisesIds[0]} does not exist.`,
+      );
+    }
+
     const parsedSequencies = sequencies.map(sequency =>
       this.sequenciesRepository.create(sequency),
     );
