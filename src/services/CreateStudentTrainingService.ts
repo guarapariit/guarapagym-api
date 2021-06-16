@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import UsersRepository from 'repositories/UsersRepository';
-import Exercise from 'models/Exercise';
+import UsersRepository from '../repositories/UsersRepository';
+import Exercise from '../models/Exercise';
 import AppError from '../errors/AppError';
 
 import TrainingsRepository from '../repositories/TrainingsRepository';
