@@ -28,7 +28,10 @@ class CreateExerciseService {
         },
       });
 
-    if (checkExerciseNameInCategoryExists) {
+    if (
+      checkExerciseNameInCategoryExists &&
+      checkExerciseNameInCategoryExists.id !== exercise.id
+    ) {
       throw new AppError(
         "An exercise with this name already exists in it's category.",
       );

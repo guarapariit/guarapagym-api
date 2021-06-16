@@ -17,7 +17,8 @@ export default class CategoriesController {
   }
 
   async update(request: Request, response: Response): Promise<Response> {
-    const { id, name } = request.body;
+    const { id } = request.params;
+    const { name } = request.body;
 
     const updateCategory = new UpdateCategoryService();
 

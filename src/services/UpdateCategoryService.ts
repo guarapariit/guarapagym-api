@@ -27,7 +27,10 @@ class UpdateCategoryService {
       },
     );
 
-    if (checkCategoryWithNameExists) {
+    if (
+      checkCategoryWithNameExists &&
+      checkCategoryWithNameExists.id !== category.id
+    ) {
       throw new AppError('Category already exists.');
     }
 

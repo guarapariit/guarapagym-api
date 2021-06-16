@@ -21,7 +21,8 @@ export default class ExercisesController {
   }
 
   async update(request: Request, response: Response): Promise<Response> {
-    const { id, name, video_url } = request.body;
+    const { id } = request.params;
+    const { name, video_url } = request.body;
 
     const updateExercise = new UpdateExerciseService();
 

@@ -4,10 +4,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinColumn,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
@@ -44,7 +40,7 @@ class User {
   days: number[];
 
   @Exclude()
-  @Column()
+  @Column({ nullable: true })
   instructor_id: string;
 
   @CreateDateColumn()

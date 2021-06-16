@@ -6,43 +6,23 @@ import StudentsController from '../../controllers/StudentsController';
 import InstructorStudentsController from '../../controllers/InstructorStudentsController';
 import ensureAuthenticated from '../../middlewares/ensureAuthenticated';
 
+import userTrainingsRouter from './student.trainings.routes';
+
 const studentsController = new StudentsController();
 const instructorStudentsController = new InstructorStudentsController();
 const studentsRouter = Router();
 
-studentsRouter.post(
-  '/',
-  ensureAuthenticated,
-  ensureManager,
-  studentsController.create,
-);
+studentsRouter.use(ensureAuthenticated);
+studentsRouter.use('/', userTrainingsRouter);
 
-studentsRouter.get(
-  '/',
-  ensureAuthenticated,
-  ensureManager,
-  studentsController.show,
-);
+studentsRouter.post('/', ensureManager, studentsController.create);
 
-studentsRouter.get(
-  '/me',
-  ensureAuthenticated,
-  ensureInstructor,
-  instructorStudentsController.show,
-);
+studentsRouter.get('/', ensureManager, studentsController.show);
 
-studentsRouter.get(
-  '/:id',
-  ensureAuthenticated,
-  ensureManager,
-  studentsController.index,
-);
+studentsRouter.get('/me', ensureInstructor, instructorStudentsController.show);
 
-studentsRouter.put(
-  '/',
-  ensureAuthenticated,
-  ensureManager,
-  studentsController.update,
-);
+studentsRouter.get('/:id', ensureManager, studentsController.index);
+
+studentsRouter.put('/', ensureManager, studentsController.update);
 
 export default studentsRouter;

@@ -7,7 +7,7 @@ const exercisesController = new ExercisesController();
 
 exercisesRouter.get('/', exercisesController.show);
 exercisesRouter.post('/', exercisesController.create);
-exercisesRouter.put('/', exercisesController.update);
+exercisesRouter.put('/:id', exercisesController.update);
 exercisesRouter.delete('/:id', exercisesController.delete);
 
 export default exercisesRouter;
