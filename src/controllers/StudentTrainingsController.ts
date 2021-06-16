@@ -31,7 +31,9 @@ export default class StudentTrainingsController {
 
     const trainings = await listStudentTraining.execute({ id });
 
-    return response.json(trainings);
+    const parsedTrainings = trainings.map(training => classToClass(training));
+
+    return response.json(classToClass(parsedTrainings));
   }
 
   async index(request: Request, response: Response): Promise<Response> {
@@ -44,7 +46,7 @@ export default class StudentTrainingsController {
       id,
     });
 
-    return response.json(training);
+    return response.json(classToClass(training));
   }
 
   async update(request: Request, response: Response): Promise<Response> {
@@ -60,7 +62,7 @@ export default class StudentTrainingsController {
       sequencies,
     });
 
-    return response.json(training);
+    return response.json(classToClass(training));
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
