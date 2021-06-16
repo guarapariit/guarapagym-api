@@ -1,29 +1,32 @@
 import { Router } from 'express';
 import ensureInstructor from '../../middlewares/ensureInstructor';
 
+import StudentsTrainingsController from '../../controllers/StudentsTrainingsController';
 import StudentTrainingsController from '../../controllers/StudentTrainingsController';
 
 const studentTrainingsRouter = Router();
+const studentsTrainingsController = new StudentsTrainingsController();
 const studentTrainingsController = new StudentTrainingsController();
 
+studentTrainingsRouter.get('/trainings/me', studentTrainingsController.show);
 studentTrainingsRouter.use(ensureInstructor);
 
-studentTrainingsRouter.get('/:id/trainings', studentTrainingsController.show);
+studentTrainingsRouter.get('/:id/trainings', studentsTrainingsController.show);
 studentTrainingsRouter.post(
   '/:id/trainings',
-  studentTrainingsController.create,
+  studentsTrainingsController.create,
 );
 studentTrainingsRouter.get(
   '/:studentId/trainings/:id',
-  studentTrainingsController.index,
+  studentsTrainingsController.index,
 );
 studentTrainingsRouter.put(
   '/:studentId/trainings/:id',
-  studentTrainingsController.update,
+  studentsTrainingsController.update,
 );
 studentTrainingsRouter.delete(
   '/:studentId/trainings/:id',
-  studentTrainingsController.delete,
+  studentsTrainingsController.delete,
 );
 
 export default studentTrainingsRouter;
